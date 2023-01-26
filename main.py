@@ -19,7 +19,7 @@ import random
 
 def main():
     cards = pd.read_json("AllCards.json", orient='index')
-    legal_training_cards = ((cards.loc[cards['legalities'] != {}])[["text", "convertedManaCost","types","power","toughness"]]).replace(np.nan, "")
+    legal_training_cards = ((cards.loc[cards['legalities'] != {}])[["text", "convertedManaCost","types","power","toughness","name"]]).replace(np.nan, "")
     Tfidf = TfidfVectorizer()
     X_train, X_test = train_test_split(Tfidf.fit_transform(legal_training_cards["text"]))
     Y_train, Y_test = train_test_split(legal_training_cards["convertedManaCost"])
@@ -28,6 +28,7 @@ def main():
     while 0==0:
         print("\n\n\n")
         card = cards.iloc[[random.randrange(legal_training_cards.shape[0])]]
+        print("card name",card["name"].values[0])
         print("creature stats: ",card['power'].values[0],"/",card['toughness'].values[0],sep='')
         print("card cost:",card['convertedManaCost'].values[0])
         print(card['text'].values[0])
