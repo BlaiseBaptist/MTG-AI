@@ -19,23 +19,27 @@ import random
 
 def main():
     cards = pd.read_json("AllCards.json", orient='index')
+    cards.types = (cards.types.map(lambda x: x[0]))
+    cards = cards.loc[cards.types != "Creature"]
+    cards = cards.loc[cards.types != "Land"]
+    cards = cards.loc[cards.types != "Vanguard"]
     legal_training_cards = ((cards.loc[cards['legalities'] != {}])[["text", "convertedManaCost","types","power","toughness","name"]]).replace(np.nan, "")
     Tfidf = TfidfVectorizer()
-    X_train, X_test = train_test_split(Tfidf.fit_transform(legal_training_cards["text"]))
-    Y_train, Y_test = train_test_split(legal_training_cards["convertedManaCost"])
+    x_train, x_test = train_test_split(Tfidf.fit_transform(legal_training_cards["text"]))
+    y_train, y_test= train_test_split(legal_training_cards["convertedManaCost"])
     clf = RidgeClassifier()
-    clf.fit(X_train, Y_train)
-    while 0==0:
+    clf.fit(x_train, y_train)
+    while True:
         print("\n\n\n")
         card = cards.iloc[[random.randrange(legal_training_cards.shape[0])]]
         print("card name",card["name"].values[0])
+        print("card type",card["types"].values[0])
         print("creature stats: ",card['power'].values[0],"/",card['toughness'].values[0],sep='')
         print("card cost:",card['convertedManaCost'].values[0])
         print(card['text'].values[0])
         pred = clf.predict(Tfidf.transform(card['text']))
         print("card pred cost",pred[0])
         input("enter to go to next card")
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
 if __name__ == '__main__':
     main()
 
