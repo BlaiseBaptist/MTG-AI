@@ -23,6 +23,7 @@ def main():
     cards = cards.loc[cards.types != "Creature"]
     cards = cards.loc[cards.types != "Land"]
     cards = cards.loc[cards.types != "Vanguard"]
+    cards = cards.loc[cards.types != "Plane"]
     legal_training_cards = ((cards.loc[cards['legalities'] != {}])[["text", "convertedManaCost","types","power","toughness","name"]]).replace(np.nan, "")
     Tfidf = TfidfVectorizer()
     x_train, x_test = train_test_split(Tfidf.fit_transform(legal_training_cards["text"]))
