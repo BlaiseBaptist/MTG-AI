@@ -8,3 +8,6 @@ The red cicle show the mana value of the card. The AI can not see this
 The green box shows the text of the card. The AI can see this
 
 ![049](https://github.com/BlaiseBaptist/MTG-AI/assets/40903991/78ea7ed4-84e2-419c-9273-3ade33d8bf79)
+
+## Why
+The model guesses what it thinks the mana value of the card should be based on all other cards this can indicate the power level of the card.
