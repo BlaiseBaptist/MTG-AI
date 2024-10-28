@@ -1,7 +1,3 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,11 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import RidgeClassifier
 from sklearn.metrics import ConfusionMatrixDisplay
 import random
-
-# Use a breakpoint in the code line below to debug your script.
-
-
-# Press the green button in the gutter to run the script.
 
 
 def main():
@@ -41,6 +32,6 @@ def main():
         pred = clf.predict(Tfidf.transform(card['text']))
         print("card pred cost",pred[0])
         input("enter to go to next card")
-if __name__ == '__main__':
-    main()
+
+main()
 
