@@ -13,15 +13,17 @@ The card data comes from a public API called [ScryFall](https://scryfall.com).
 
 ![049](https://github.com/BlaiseBaptist/MTG-AI/assets/40903991/78ea7ed4-84e2-419c-9273-3ade33d8bf79)
 
-## XYZ
-
-
-The model guesses what it thinks the mana value of the card should be based on all other cards this can indicate the power level of the card.
-
 ## How it works
-The code works in a couple of discrete steps. it uses
- 1. pandas to filter the initial set of all magic card to just the ones I want to train on
- 2. a TfidfVectorizer to turn the words on the magic card in numbers
- 3. a Ridge Regression to guess the mana value from the numbers   
-The code uses pandas to filter the data from list of all magic cards
+The code works in a couple of discrete steps:
+ - It uses pandas to simplify the data set by filtering out creature and land cards; this removes about ADD PERCENT% of the cards
+ - Next, it uses pandas to filter out defunct / banned / "un"-cards to clean up the data set (while there are not very many cards in this category, they would have large unwanted effect on the model).
+ - It uses a TfidfVectorizer to parse the language (i.e., to turn the words on the magic card into numbers) so the AI can read it.
+ - Then it runs a ridge regression, making a model able to predict the mana value of a particular card from these numbers. 
+ - Now the program will display a random card and tell you its prediction for the mana cost, given the words on the card, and will also show you its actual mana cost. The user can then compare these two numbers to judge if the card is worth its mana cost or is "underpowered."
+ 
+ ## Further development possibilities 
+ 
+ - Make it able to work with creature cards: able to see and account for power (damage) and toughness (health) information on the card. These pieces of data would require a different regression, because the ridge regression is not built to handle numbers that interact with the game in this way. 
+ - Be able to export the model so it doesn't have to be re-trained every time I'd like to use it.
+ - Include newly-released card sets in the data, because Magic releases new sets of cards all the time. 
 
