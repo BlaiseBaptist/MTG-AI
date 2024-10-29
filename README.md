@@ -15,7 +15,7 @@ The card data comes from a public API called [ScryFall](https://scryfall.com).
 
 ## How it works
 The code works in a couple of discrete steps:
- - It uses pandas to simplify the data set by filtering out creature and land cards; this removes about ADD PERCENT% of the cards
+ - It uses pandas to simplify the data set by filtering out creature and land cards; this removes about 50% of the cards.
  - Next, it uses pandas to filter out defunct / banned / "un"-cards to clean up the data set (while there are not very many cards in this category, they would have large unwanted effect on the model).
  - It uses a TfidfVectorizer to parse the language (i.e., to turn the words on the magic card into numbers) so the AI can read it.
  - Then it runs a ridge regression, making a model able to predict the mana value of a particular card from these numbers. 
