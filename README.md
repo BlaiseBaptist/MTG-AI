@@ -1,9 +1,10 @@
+
 # Magic the Gathering AI
 I made a model that guesses the mana value of Magic the Gathering (MTG) cards based on their text.
 ## MTG cards
 This is a MTG card
 
-The red cicle show the mana value of the card. The AI can not see this
+The red circle show the mana value of the card. The AI can not see this
 
 The green box shows the text of the card. The AI can see this
 
@@ -11,3 +12,11 @@ The green box shows the text of the card. The AI can see this
 
 ## Why
 The model guesses what it thinks the mana value of the card should be based on all other cards this can indicate the power level of the card.
+
+## How it works
+The code works in a couple of discrete steps. it uses
+ 1. pandas to filter the initial set of all magic card to just the ones i want to train on
+ 2. a TfidfVectorizer to turn the words on the magic card in numbers
+ 3. a Ridge Regression to guess the mana value from the numbers   
+The code uses pandas to filter the data from list of all magic cards
+
